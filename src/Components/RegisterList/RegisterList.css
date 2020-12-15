@@ -1,0 +1,119 @@
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.multiple {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.multiple__heading {
+    display: inline-block;
+    margin-left: 80px;
+    transform: translateY(-25px)
+}
+
+.multiple__container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.multiple__addEvent--container {
+    margin-top: 32px;
+}
+
+.multiple__addEvent {
+    color: #207FEE;
+}
+.cursor {
+    cursor: pointer;
+}
+
+.multiple__content {
+    width: 78%;
+    background-color: #F4F7FC;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.multiple__content--main {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.resisterList__grid {
+    display: grid;
+    grid-template-columns: 15% 35% 15% 17% 10%;
+    margin: 20px;
+    justify-content: space-between;
+    grid-column-gap: 20px;
+}
+
+.registerList__content--nav {
+    margin: 15px 20px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: #F4F7FC;
+    text-align: left;
+    font-size: 14px;
+    color: #686868;
+}
+
+.registerList__content--userInfo {
+   margin: 15px 30px;
+   text-align: left;
+}
+
+.registerList__content--userInfo p {
+    font-size: 14px;
+    margin-top: 7px;
+}
+
+.trash-btn {
+    margin-top: 5px;
+    display: block;
+    background-color: #FF444A;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    padding:2px;
+    cursor: pointer;
+}
+
+/* Add Event Component */
+.addEvent__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    padding:  15px 25px;
+}
+
+.addEvent__textarea {
+    outline: none;
+}
+
+.addEvent__input h4 {
+    margin-bottom: 15px;
+}
+
+.upload-image {
+    width: 25px;
+}
+.upload-btn-container {
+    margin-top: 15px;
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+}
+.MuiButton-outlinedPrimary {
+    color: #207FEE !important;
+    border: 1px solid #207fee !important;
+}
+.MuiButton-containedSecondary {
+    background-color:#207fee !important;
+} 

@@ -1,0 +1,30 @@
+.MuiFormLabel-root {
+    color: #000 !important;
+    font-size: 14px !important;
+}
+.MuiButton-containedPrimary {
+    background-color: #3F90FC !important;
+}
+.register {
+    text-align: center;
+}
+.register-content {
+    margin: 70px auto;
+    width: 570px;
+    border: 1px solid #ababab;
+    border-radius: 4px;
+    padding: 25px 50px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.register-heading {
+    font-size: 24px;
+    text-align: left;
+}
+.register-input {
+    width: 100%;
+}
+.registration-btn {
+    margin-top: 20px !important;
+    display: block;
+    background-color: #3F90FC !important;
+}

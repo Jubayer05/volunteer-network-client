@@ -1,13 +1,55 @@
+import { createContext, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './App.css';
-import Header from './Components/Headers/Header';
+import AddEvent from "./Components/AddEvent/AddEvent";
 import Home from './Components/Home/Home';
+import Login from './Components/Login/Login';
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import Register from "./Components/Register/Register";
+import RegisterList from "./Components/RegisterList/RegisterList";
+import Review from "./Components/Review/Review";
+
+export const Volunteering = createContext();
 
 function App() {
+  const [volunteerInfo, setVolunteerInfo ] = useState({
+    email: "",
+    name: ""
+  });
+  const [selectedEvent, setSelectedEvent] = useState([]);
+  console.log(volunteerInfo);
   return (
-    <div className="App">
-      <Home></Home>
-      <Header></Header>
-    </div>
+    <Volunteering.Provider value=
+    {{volunteerInfo: [volunteerInfo, setVolunteerInfo ], 
+      selectedEvent: [selectedEvent, setSelectedEvent]
+    }}>
+      <Router>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/review">
+            <Review />
+          </Route>
+          <Route path="/registerList">
+            <RegisterList />
+          </Route>
+          <Route path="/addEvent">
+            <AddEvent />
+          </Route>
+          <PrivateRoute path="/register">
+              <Register />
+          </PrivateRoute>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+    </Router>
+    </Volunteering.Provider>
   );
 }
 

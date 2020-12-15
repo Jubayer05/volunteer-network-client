@@ -1,0 +1,28 @@
+.MuiCardActionArea-root {
+    height: 100% !important;
+}
+
+.makeStyles-media-2 {
+    transform: translateY(-20px);
+    height: 180px !important;
+}
+
+.MuiCardContent-root {
+    padding: 0 8px !important;
+} 
+
+.MuiTypography-h5 {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    color: white !important;
+    text-align: center !important;
+}
+
+.card-effect {
+    transition: all 0s linear;
+}
+
+.card-effect:hover {
+    transform: scale(1.02) translateY(-3px);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}

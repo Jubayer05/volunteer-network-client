@@ -1,20 +1,22 @@
 import React from 'react';
 import fakeData from '../../fakedata/fakedata';
+import Header from '../Headers/Header';
+import VolunteerEvent from '../VolunteerEvent/VolunteerEvent';
 import "./Home.css";
 
 
 const Home = () => {
    console.log(fakeData)
     return (
+        <div className="home">
+            <Header></Header>
         <div className="home-container">
             {
                 fakeData.map(item => 
-                    <div className="volunteer-item">
-                        <img className="volunteer-image" src={item.image} alt="Volunteering Images"/>
-                        <h2 className="volunteer-name">{item.name}</h2>
-                    </div>
+                <VolunteerEvent key={item.id} item={item} />
                 )
             }
+        </div>
         </div>
     );
 };
