@@ -17,8 +17,8 @@ const Review = () => {
                 <ul className="navbar-list">
                     <li><Link to="/" className="navbar-link" href="#facebook">Home</Link></li>
                     <li><a className="navbar-link" href="#donations">Donations</a></li>
-                    <li><Link to="/review" className="navbar-link">Events</Link></li>
-                    <li><a className="navbar-link" href="#events">Blog</a></li>
+                    <li><Link to="/review" className="navbar-link">Events </Link></li>
+                    <li><a className="navbar-link" href="#events">Blogs</a></li>
                     <li><a className="navbar-link" href="#names"><strong>{info.name}</strong></a></li>
                 </ul>
             </div>
