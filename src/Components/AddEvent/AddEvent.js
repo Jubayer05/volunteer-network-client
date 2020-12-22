@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "../RegisterList/RegisterList.css";
 import logo from "../../images/Group 1329.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,12 +11,41 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { Button, TextareaAutosize, TextField } from '@material-ui/core';
+import { Volunteering } from '../../App';
 
 const AddEvent = () => {
+    const {addEvent} = useContext(Volunteering);
+    const [event, setEvent] = addEvent;
     const [selectedDate, setSelectedDate] = useState(new Date());
-  const handleDateChange = (date) => {
+    const handleDateChange = (date) => {
+    setEvent({...event, date: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`});
     setSelectedDate(date);
-  };
+    };
+
+    const handleEventData = (e) => {
+        const newEvent = {...event};
+        newEvent[e.target.name] = e.target.value;
+        setEvent(newEvent);
+    }
+    
+    const handleAddEventDB = () => {
+            fetch('http://localhost:5000/addEvent', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(event),
+              })
+              .then(response => response.json())
+              .then(data => {
+                console.log('Success:', data);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              })
+    }
+
+
     return (
         <div className="multiple">
             <div className="multiple__header">
@@ -40,6 +69,8 @@ const AddEvent = () => {
                            <div className="addEvent__input">
                                <h4>Event Name</h4>
                                <TextField 
+                               onBlur={handleEventData}
+                               name="title"
                                className="register-input"
                                id="outlined-basic" 
                                label="Event Title" variant="outlined" />
@@ -50,6 +81,8 @@ const AddEvent = () => {
                                 <Grid container justify="space-around">
                                     <KeyboardDatePicker
                                     className="register-input"
+                                    name="date"
+                                    onBlur={handleEventData}
                                     disableToolbar
                                     variant="inline"
                                     format="dd/MM/yyyy"
@@ -67,6 +100,8 @@ const AddEvent = () => {
                            <div className="addEvent__input">
                                <h4>Description</h4>
                                <TextareaAutosize
+                               onBlur={handleEventData}
+                               name="description"
                                className="register-input addEvent__textarea"
                                aria-label="minimum height" 
                                rowsMin={7} 
@@ -90,6 +125,7 @@ const AddEvent = () => {
                     </div>
                         <div className="upload-btn-container">
                             <Button 
+                            onClick={handleAddEventDB}
                             className="upload-btn" 
                             variant="contained" 
                             color="secondary">Submit</Button>

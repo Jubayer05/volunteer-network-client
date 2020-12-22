@@ -29,7 +29,6 @@ const VolunteerEvent = (props) => {
     }
 
     const {image, eventName} = props.item;
-    console.log(image, eventName);
     const classes = useStyles();
     return (
       

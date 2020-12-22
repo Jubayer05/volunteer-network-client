@@ -19,17 +19,35 @@ const Register = () => {
       
 
   const [selectedDate, setSelectedDate] = useState(new Date());
+  
+
   const handleDateChange = (date) => {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
     const month = monthNames[date.getMonth()];
     const regDate = {
       date: `${date.getDate()} ${month}, ${date.getFullYear()}`,
     }
+    
     setInfo({...info, ...regDate});
     setSelectedDate(date); 
-};
+  };
 
-  const handleRegistration = () => {    
+  const handleRegistration = () => { 
+    fetch("http://localhost:5000/addVolunteer", {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(info),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })
+    
     const allEvent = [...event, info];
     setEvent(allEvent);
   }

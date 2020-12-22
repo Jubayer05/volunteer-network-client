@@ -16,16 +16,25 @@ import Review from "./Components/Review/Review";
 export const Volunteering = createContext();
 
 function App() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+  const selectedMonth = monthNames[selectedDate.getMonth()];
+  const regSelectedDate = {
+    date: `${selectedDate.getDate()} ${selectedMonth}, ${selectedDate.getFullYear()}`,
+  }
   const [volunteerInfo, setVolunteerInfo ] = useState({
     email: "",
-    name: ""
+    name: "",
+   ...regSelectedDate,
   });
+
   const [selectedEvent, setSelectedEvent] = useState([]);
-  console.log(volunteerInfo);
+  const [addEvent, setAddEvent] = useState({});
   return (
     <Volunteering.Provider value=
     {{volunteerInfo: [volunteerInfo, setVolunteerInfo ], 
-      selectedEvent: [selectedEvent, setSelectedEvent]
+      selectedEvent: [selectedEvent, setSelectedEvent],
+      addEvent: [addEvent, setAddEvent]
     }}>
       <Router>
         <Switch>

@@ -1,10 +1,12 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Volunteering } from '../../App';
 import logo from "../../images/Group 1329.png";
 import "./Header.css";
 
 const Header = () => {
+    
     return (
         <div className="header">
             <div className="navbar-overlay">
@@ -24,12 +26,14 @@ const Header = () => {
                         </Button>
                     </li>
                     <li>
+                        <Link to="/addEvent">
                         <Button  
                             className="admin-btn"
                             variant="contained" 
                             color="secondary">
                             Admin
                         </Button>
+                        </Link>
                     </li>
                 </ul>
             </div>
