@@ -12,6 +12,7 @@ import {
 } from '@material-ui/pickers';
 import { Button, TextareaAutosize, TextField } from '@material-ui/core';
 import { Volunteering } from '../../App';
+import { Link } from 'react-router-dom';
 
 const AddEvent = () => {
     const {addEvent} = useContext(Volunteering);
@@ -21,20 +22,28 @@ const AddEvent = () => {
     setEvent({...event, date: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`});
     setSelectedDate(date);
     };
+    const [file, setFile] = useState(null);
 
     const handleEventData = (e) => {
         const newEvent = {...event};
         newEvent[e.target.name] = e.target.value;
         setEvent(newEvent);
     }
-    
+
+    const handleFileChange = (e) => {
+        const newFile = e.target.files[0];
+        setFile(newFile);
+    }
+
     const handleAddEventDB = () => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('title', event.title);
+        formData.append('description', event.description);
+
             fetch('http://localhost:5000/addEvent', {
-                method: 'POST', // or 'PUT'
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(event),
+                method: 'POST',
+                body: formData
               })
               .then(response => response.json())
               .then(data => {
@@ -55,8 +64,10 @@ const AddEvent = () => {
             <div className="multiple__container">
                 <div className="multiple__addEvent--container">
                     <div className="mb-20 cursor">
+                    <Link to="/registerList" className="toggle-link">
                         <FontAwesomeIcon icon={faUser} />&nbsp;&nbsp;
                         <span>Volunteer Register List</span>
+                    </Link>    
                     </div>
                     <div className="multiple__addEvent cursor">
                         <FontAwesomeIcon icon={faPlus} />&nbsp;&nbsp;
@@ -64,8 +75,8 @@ const AddEvent = () => {
                     </div>
                 </div>
                 <div className="multiple__content">
-                    <div className="multiple__content--main">
-                        <div className="addEvent__grid">
+                       <div className="multiple__content--main">
+                        <div className="addEvent__grid"> 
                            <div className="addEvent__input">
                                <h4>Event Name</h4>
                                <TextField 
@@ -106,11 +117,11 @@ const AddEvent = () => {
                                aria-label="minimum height" 
                                rowsMin={7} 
                                placeholder="Description" />
-
                            </div>
                            <div className="addEvent__input">
                                <h4>Upload a Images</h4>
                                <Button variant="outlined"
+                               onChange={handleFileChange}
                                component="label"
                                color="primary">
                                 <img className="upload-image" src={upload} alt=""/>
@@ -130,7 +141,7 @@ const AddEvent = () => {
                             variant="contained" 
                             color="secondary">Submit</Button>
                         </div>
-                </div>
+                </div> 
             </div>
             </div>
     );

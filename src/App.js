@@ -24,16 +24,14 @@ function App() {
   }
   const [volunteerInfo, setVolunteerInfo ] = useState({
     email: "",
-    name: "",
+    userName: "",
    ...regSelectedDate,
   });
 
-  const [selectedEvent, setSelectedEvent] = useState([]);
   const [addEvent, setAddEvent] = useState({});
   return (
     <Volunteering.Provider value=
     {{volunteerInfo: [volunteerInfo, setVolunteerInfo ], 
-      selectedEvent: [selectedEvent, setSelectedEvent],
       addEvent: [addEvent, setAddEvent]
     }}>
       <Router>

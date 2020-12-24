@@ -48,7 +48,7 @@
 
 .resisterList__grid {
     display: grid;
-    grid-template-columns: 15% 35% 15% 17% 10%;
+    grid-template-columns: 15% 32% 11% 24% 4%;
     margin: 20px;
     justify-content: space-between;
     grid-column-gap: 20px;
@@ -65,17 +65,16 @@
 }
 
 .registerList__content--userInfo {
-   margin: 15px 30px;
+   margin: 7px 30px;
    text-align: left;
 }
 
 .registerList__content--userInfo p {
     font-size: 14px;
-    margin-top: 7px;
 }
 
 .trash-btn {
-    margin-top: 5px;
+    margin-top: 3px;
     display: block;
     background-color: #FF444A;
     width: 18px;
@@ -83,6 +82,10 @@
     border-radius: 5px;
     padding:2px;
     cursor: pointer;
+}
+
+.toggle-link {
+    color: #000000;
 }
 
 /* Add Event Component */

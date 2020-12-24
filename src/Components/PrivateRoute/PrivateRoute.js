@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { Volunteering } from '../../App';
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const {volunteerInfo, selectedEvent} = useContext(Volunteering);
+  const {volunteerInfo} = useContext(Volunteering);
   const [info, setInfo] = volunteerInfo;  
 
     return (

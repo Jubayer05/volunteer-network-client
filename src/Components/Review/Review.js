@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./Review.css";
 import logo from "../../images/Group 1329.png";
 import { Button } from '@material-ui/core';
@@ -6,10 +6,28 @@ import { Volunteering } from '../../App';
 import { Link } from 'react-router-dom';
 
 const Review = () => {
-    const {volunteerInfo, selectedEvent} = useContext(Volunteering);
+    const {volunteerInfo} = useContext(Volunteering);
     const [info, setInfo] = volunteerInfo;
-    const [events, setEvents] = selectedEvent;
-    console.log(events)
+    const [registeredEvent, setRegisteredEvent] = useState([]);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/registerEvent?email=${info.email}`)
+        .then(response => response.json())
+        .then(data => setRegisteredEvent(data));
+    }, []);
+
+    const handleDeleteRegister = (e) => {
+        e.target.parentElement.parentElement.parentElement.parentElement.style.display = 'none';
+    }
+
+    const handleDeleteRegisterDB = (id) => {
+        fetch(`http://localhost:5000/deleteRegisterDB/${id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data => console(data))
+    }
+
     return (
         <div className="review">
             <div className="navbar">
@@ -19,18 +37,24 @@ const Review = () => {
                     <li><a className="navbar-link" href="#donations">Donations</a></li>
                     <li><Link to="/review" className="navbar-link">Events </Link></li>
                     <li><a className="navbar-link" href="#events">Blogs</a></li>
-                    <li><a className="navbar-link" href="#names"><strong>{info.name}</strong></a></li>
+                    <li><a className="navbar-link" href="#names"><strong>{info.userName}</strong></a></li>
                 </ul>
             </div>
 
             <div className="review-container">
             {
-            events.map(event => <div className="review-card" key={event.id}>
-                    <img src={event.image} className="review__card--image" alt=""/>
+            registeredEvent.map(event => <div className="review-card" key={event._id}>
+                    <img src={`http://localhost:5000/${event.name}`} className="review__card--image" alt=""/>
                     <div className="review__card--content">
-                        <h3 className="review__card--heading">{event.eventName}</h3>
+                        <h3 className="review__card--heading">{event.title}</h3>
                         <p className="review__card--date">{event.date}</p>
-                        <Button className="review__card--btn" variant="contained" color="primary">Cancel</Button>
+                        <span onClick={() => handleDeleteRegisterDB(`${event._id}`)}>
+                        <Button onClick={handleDeleteRegister} 
+                        className="review__card--btn" 
+                        variant="contained" color="primary">
+                            Cancel
+                        </Button>
+                        </span>
                     </div>
                 </div> 
             )}            

@@ -20,29 +20,28 @@ const useStyles = makeStyles({
   });
 
 const VolunteerEvent = (props) => {
-    const {volunteerInfo, selectedEvent} = useContext(Volunteering);
+    const {volunteerInfo} = useContext(Volunteering);
     const [info, setInfo] = volunteerInfo;
+    const {name, title} = props.item;
+    const classes = useStyles();
     
     const handleCardData = (e) => {
-      const newInfo = {...info, ...e};
+      const newInfo = {...info, title, name};
       setInfo(newInfo);
     }
 
-    const {image, eventName} = props.item;
-    const classes = useStyles();
     return (
-      
         <Card className="card-effect" onClick={() => handleCardData(props.item)}>
         <CardActionArea >
         <Link to="/register" >
           <CardMedia
             className={classes.media}
-            image={image}
+            image={`http://localhost:5000/${name}`}
             title="Contemplative Reptile"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {eventName}
+              {title}
             </Typography>
           </CardContent>
           </Link>

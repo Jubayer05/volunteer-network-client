@@ -13,9 +13,8 @@ import { Link } from 'react-router-dom';
 
 
 const Register = () => {
-  const {volunteerInfo, selectedEvent} = useContext(Volunteering);
+  const {volunteerInfo} = useContext(Volunteering);
   const [info, setInfo] = volunteerInfo;
-  const [event, setEvent] = selectedEvent;
       
 
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -33,6 +32,7 @@ const Register = () => {
   };
 
   const handleRegistration = () => { 
+    console.log(info)
     fetch("http://localhost:5000/addVolunteer", {
       method: 'POST', 
       headers: {
@@ -47,9 +47,6 @@ const Register = () => {
     .catch((error) => {
       console.error('Error:', error);
     })
-    
-    const allEvent = [...event, info];
-    setEvent(allEvent);
   }
     return (
         <div className="register">
@@ -59,7 +56,7 @@ const Register = () => {
                 
                 <TextField className="register-input" 
                 id="standard-basic" 
-                defaultValue={info.name} 
+                defaultValue={info.userName} 
                 label="Full Name" />
 
                 <TextField className="register-input" 
@@ -85,20 +82,23 @@ const Register = () => {
                     />        
                 </Grid>
                 </MuiPickersUtilsProvider>
-                <TextField className="register-input" id="standard-basic" label="Write a description" />
+
+                <TextField className="register-input" 
+                id="standard-basic" label="Write a description" />
+
                 <TextField className="register-input" 
                 id="standard-basic" 
-                defaultValue={info.eventName} 
+                defaultValue={info.title} 
                 label="Event Name" />
-                <Button 
-                  onClick={handleRegistration}
-                  className="register-input registration-btn" 
-                  variant="contained" 
-                  color="secondary">
-                  <Link to="/review">
-                  Registration
-                  </Link>
-                </Button>
+                <Link to="/review">
+                  <Button 
+                    onClick={handleRegistration}
+                    className="register-input registration-btn" 
+                    variant="contained" 
+                    color="secondary">
+                    Registration
+                  </Button>
+                </Link>
             </div>
         </div>
     );

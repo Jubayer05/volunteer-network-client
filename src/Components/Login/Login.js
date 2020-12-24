@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 
 const Login = () => {
-    const {volunteerInfo, selectedEvent} = useContext(Volunteering);
+    const {volunteerInfo} = useContext(Volunteering);
     const [info, setInfo] = volunteerInfo;
 
     let history = useHistory();
@@ -28,7 +28,7 @@ const Login = () => {
             const token = result.credential.accessToken;
             const user = {
                 email: result.user.email,
-                name: result.user.displayName
+                userName: result.user.displayName
             };
             const userInfo = {...info, ...user};
             setInfo(userInfo);
